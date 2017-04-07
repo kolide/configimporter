@@ -1,0 +1,6 @@
+# binaries
+*.exe
+
+vendor
+
+.DS_Store

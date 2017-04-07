@@ -1,0 +1,14 @@
+hash: 3a15109a3f2c2ea3b09f12132246b31b2f85ae8e821582cf2961ca8fcbaf0a3d
+updated: 2017-04-05T17:02:44.559875125-05:00
+imports:
+- name: github.com/kolide/kolide
+  version: c90368c4afae1fbf603dde64cae97c1d20315870
+  subpackages:
+  - server/kolide
+- name: github.com/stretchr/testify
+  version: 69483b4bd14f5845b5a1e55bca19e954e827f1d0
+  subpackages:
+  - assert
+  - mock
+  - require
+testImports: []
