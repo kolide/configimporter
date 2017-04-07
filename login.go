@@ -45,5 +45,5 @@ func loginToKolide(client *http.Client, userName, password, host string) (string
 		return result.Token, nil
 	}
 
-	return "", errors.New("login failed with " + response.Status)
+	return "", errors.New(response.Status)
 }

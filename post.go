@@ -34,6 +34,7 @@ func printImportResults(resp *importConfigResponse) error {
 		return errors.New("invalid config response")
 	}
 	for section, status := range resp.ImportStatus {
+		fmt.Println(lineSep)
 		fmt.Printf("CONFIGURATION SECTION: %s\n", section)
 		fmt.Println(lineSep)
 		fmt.Printf("Title:        %s\n", status.Title)
@@ -41,18 +42,16 @@ func printImportResults(resp *importConfigResponse) error {
 		fmt.Printf("Skip Count:   %d\n", status.SkipCount)
 		if len(status.Warnings) > 0 {
 			fmt.Println(lineSep)
-			for k, msgs := range status.Warnings {
-				fmt.Printf("Warnings: %s\n", k)
+			for _, msgs := range status.Warnings {
 				for _, msg := range msgs {
-					fmt.Printf("\t%s\n", msg)
+					fmt.Printf("WARN: %s\n", msg)
 				}
 			}
 		}
 		if len(status.Messages) > 0 {
 			fmt.Println(lineSep)
-			fmt.Println("Messages")
 			for _, msg := range status.Messages {
-				fmt.Printf("\t%s\n", msg)
+				fmt.Printf("INFO: %s\n", msg)
 			}
 		}
 	}
