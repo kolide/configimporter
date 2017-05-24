@@ -34,10 +34,10 @@ func main() {
 	}
 	fmt.Println()
 	fmt.Println("Running import with the following parameters:")
-	fmt.Printf("USER: %21s\n", *userName)
-	fmt.Printf("HOST: %29s\n", *host)
+	fmt.Printf("USER:        %s\n", *userName)
+	fmt.Printf("HOST:        %s\n", *host)
 	fmt.Printf("CONFIG FILE: %s\n", *config)
-	fmt.Printf("DRY RUN: %9t\n\n", *dryRun)
+	fmt.Printf("DRY RUN:     %t\n\n", *dryRun)
 
 	httpClient := &http.Client{
 		Transport: &http.Transport{
