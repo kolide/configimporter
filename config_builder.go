@@ -11,6 +11,7 @@ import (
 )
 
 type importBody struct {
+	DryRun bool   `json:"dry_run"`
 	Config string `json:"config"`
 }
 

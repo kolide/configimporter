@@ -14,6 +14,8 @@ Usage: configimporter -host https://localhost:8080 -user bob -pwd 'secret' -conf
 
   -config string
         Path to an Osquery configuration file
+  -dry-run
+        Run import but don't make any changes to Kolide 
   -help
         Show usage
   -host string

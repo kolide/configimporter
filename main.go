@@ -14,6 +14,7 @@ var (
 	password = flag.String("pwd", "", "Password for user")
 	host     = flag.String("host", "https://localhost:8080", "Kolide host name")
 	config   = flag.String("config", "", "Path to an Osquery configuration file")
+	dryRun   = flag.Bool("dry-run", false, "Run import but don't change Kolide db")
 	help     = flag.Bool("help", false, "Show usage")
 )
 
@@ -31,6 +32,13 @@ func main() {
 		flag.PrintDefaults()
 		os.Exit(0)
 	}
+	fmt.Println()
+	fmt.Println("Running import with the following parameters:")
+	fmt.Printf("USER:        %s\n", *userName)
+	fmt.Printf("HOST:        %s\n", *host)
+	fmt.Printf("CONFIG FILE: %s\n", *config)
+	fmt.Printf("DRY RUN:     %t\n\n", *dryRun)
+
 	httpClient := &http.Client{
 		Transport: &http.Transport{
 			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
@@ -44,8 +52,17 @@ func main() {
 
 	importBody, err := collectExternalPacks(buffer, &externalPackReader{})
 	handleError("build import body failed", err)
+	importBody.DryRun = *dryRun
 
 	err = sendConfigToKolide(httpClient, *host, authToken, importBody)
 	handleError("post import failed", err)
+
+	if *dryRun {
+		fmt.Println()
+		fmt.Println("=====================================================================")
+		fmt.Println("DRY RUN is enabled.  Import was successful, but no changes were made.")
+		fmt.Println("=====================================================================")
+		fmt.Println()
+	}
 
 }

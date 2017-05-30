@@ -122,5 +122,5 @@ func sendConfigToKolide(client *http.Client, host, token string, imp *importBody
 		return errors.New("invalid input file")
 	}
 
-	return nil
+	return fmt.Errorf("http response %s", resp.Status)
 }
