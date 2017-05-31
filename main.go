@@ -11,7 +11,6 @@ import (
 
 var (
 	userName = flag.String("user", "", "Kolide user name")
-	password = flag.String("pwd", "", "Password for user")
 	host     = flag.String("host", "https://localhost:8080", "Kolide host name")
 	config   = flag.String("config", "", "Path to an Osquery configuration file")
 	dryRun   = flag.Bool("dry-run", false, "Run import but don't change Kolide db")
@@ -39,12 +38,15 @@ func main() {
 	fmt.Printf("CONFIG FILE: %s\n", *config)
 	fmt.Printf("DRY RUN:     %t\n\n", *dryRun)
 
+	password, err := getPass()
+	handleError("retrieving password", err)
+
 	httpClient := &http.Client{
 		Transport: &http.Transport{
 			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
 		},
 	}
-	authToken, err := loginToKolide(httpClient, *userName, *password, *host)
+	authToken, err := loginToKolide(httpClient, *userName, password, *host)
 	handleError("login failed", err)
 
 	buffer, err := ioutil.ReadFile(*config)
