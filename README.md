@@ -5,24 +5,27 @@ configimporter application will take an Osquery configuration file, consolidate 
 
 #### Installation
 ```
-go get github.com/kolide/configimporter
+go get -u github.com/kolide/configimporter
 ```
 
 #### Usage
 ```
-Usage: configimporter -host https://localhost:8080 -user bob -pwd 'secret' -config /somedir/osquery.cfg
+Usage: configimporter -host https://localhost:8080 -user 'bob' -config /somedir/osquery.cfg
 
   -config string
         Path to an Osquery configuration file
   -dry-run
-        Run import but don't make any changes to Kolide 
+        Run import but don't make any changes to Kolide
   -help
         Show usage
   -host string
         Kolide host name (default "https://localhost:8080")
-  -pwd string
-        Password for user
   -user string
         Kolide user name
 
+```
+The user will be prompted for their Kolide password; alternatively, the password may
+be supplied by setting an environment variable.
+```
+export CONFIGIMPORTER_PASSWORD=supersecret
 ```
