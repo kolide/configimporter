@@ -86,7 +86,11 @@ func collectExternalPacks(buffer []byte, rdr externalReader) (*importBody, error
 }
 
 func decodeConfig(buff []byte) (*osqueryConfig, error) {
+	buff = bytes.Replace(buff, []byte(" \\\n"), []byte(""), -1)
+	buff = bytes.Replace(buff, []byte("        "), []byte(" "), -1)
+
 	reader := bytes.NewReader(buff)
+
 	var cfg osqueryConfig
 	err := json.NewDecoder(reader).Decode(&cfg)
 	if err != nil {
