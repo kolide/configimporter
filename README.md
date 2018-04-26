@@ -1,4 +1,7 @@
-### Osquery Configuration Importer
+Looking to import osquery packs into [Kolide Fleet](https://github.com/kolide/kolide)? Your best bet is following the instructions in [this gist](https://gist.github.com/marpaia/9e061f81fa60b2825f4b6bb8e0cd2c77) as this repo has been deprecated.
+
+
+### Osquery Configuration Importer [Deprecated]
 
 Import an Osquery configuration file into [Kolide](https://github.com/kolide/kolide). The
 configimporter application will take an Osquery configuration file, consolidate any external packs found in the file and then post it to Kolide where it is validated and imported.  
